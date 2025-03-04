@@ -55,10 +55,11 @@ export const streamGptResponse = async (text, images = [], onChunk) => {
         'Authorization': `Bearer ${OPENAI_API_KEY}`
       },
       body: JSON.stringify({
-        model: images.length > 0 ? "gpt-4-vision-preview" : "gpt-3.5-turbo",
+        // Use the o1-2024-12-17 model for all requests
+        model: "o1-2024-12-17",
         messages,
         stream: true,
-        max_tokens: 1000
+        max_tokens: 10000
       }),
       signal: controller.signal
     });
@@ -141,5 +142,5 @@ Hope that helps!`;
 };
 
 // Comment this line and uncomment the line below to use the real OpenAI API
-export { mockStreamGptResponse as streamGptResponse };
-// export { streamGptResponse }; 
+// export { mockStreamGptResponse as streamGptResponse };
+export { streamGptResponse }; 
